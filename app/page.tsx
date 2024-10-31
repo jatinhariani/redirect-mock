@@ -5,6 +5,20 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 
+function SearchParamsComponent() {
+  const params = useSearchParams();
+  return (
+    <>
+      <Button variant="success" className="w-48" asChild>
+        <Link href={params.get("successUrl") || ""}>Success</Link>
+      </Button>
+      <Button variant="destructive" className="w-48" asChild>
+        <Link href={params.get("failureUrl") || ""}>Failure</Link>
+      </Button>
+    </>
+  );
+}
+
 export default function Home() {
   const params = useSearchParams();
 
@@ -15,12 +29,7 @@ export default function Home() {
           <h1 className="text-2xl font-bold text-center sm:text-left">
             This is a test website for testing a redirect page
           </h1>
-          <Button variant="success" className="w-48" asChild>
-            <Link href={params.get("successUrl") || ""}>Success</Link>
-          </Button>
-          <Button variant="destructive" className="w-48" asChild>
-            <Link href={params.get("failureUrl") || ""}>Failure</Link>
-          </Button>
+          <SearchParamsComponent />
         </main>
       </div>
     </Suspense>
